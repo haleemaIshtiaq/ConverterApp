@@ -28,6 +28,30 @@ public class Main {
 
 
               }
+
+
+              case 2 -> {
+                  IO.println("--- Currency Converter ---");
+                  IO.println("Convert:\n" +
+                          "  1. SEK to USD\n" +
+                          "  2. SEK to EUR");
+                  int subChioce2 = Integer.parseInt(IO.readln("Your choice: "));
+                  double amount = Double.parseDouble(IO.readln("Enter amount in SEK: "));
+                  if (subChioce2 == 1) {
+
+                      double result2 = currencyConverter(amount, subChioce2);
+                      IO.println("Result: " + amount + " SEK = " + String.format("%.2f", result2) + " USD");
+                  } else {
+
+                      double result2 = currencyConverter(amount, subChioce2);
+                      IO.println("Result: " + amount + " SEK = " + String.format("%.2f", result2) + " EUR");
+                  }
+
+
+              }
+
+
+
               case 4 -> {
                   IO.println("Goodbye!");
                   return;
@@ -64,5 +88,16 @@ public class Main {
         else{
             return  (value - 32) * 5.0 / 9.0;
         }
+    }
+//Method to convert currency
+    public static double currencyConverter(double amount, int subChoice2){
+        if(subChoice2==1) {
+            return  amount / 10.87;
+
+        }
+        else{
+            return  amount / 11.32;
+        }
+
     }
 }
