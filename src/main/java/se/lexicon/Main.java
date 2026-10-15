@@ -7,6 +7,11 @@ public class Main {
     static final double FAHRENHEIT_FACTOR = 9.0/5.0;
     static final double FAHRENHEIT_OFFSET = 32.0;
 
+    //Currency converter
+    static final double USD_RATE = 10.87;
+    static final double EUR_RATE = 11.32;
+
+
 
 
     static void main() {
@@ -123,11 +128,11 @@ public class Main {
 //Method to convert currency
     public static double currencyConverter(double amount, int subChoice2){
         if(subChoice2==1) {
-            return  amount / 10.87;
+            return  amount / USD_RATE;
 
         }
         else{
-            return  amount / 11.32;
+            return  amount / EUR_RATE;
         }
 
     }
