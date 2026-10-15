@@ -1,5 +1,7 @@
 package se.lexicon;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -67,6 +69,8 @@ public class Main {
 
                       double result = temperatureConverter(celsius, subChoice);
                       IO.println("Result: " + celsius + " C = " + String.format("%.2f", result) + " F");
+                      //To display time
+                      IO.println("Converted at: " +getTimeStamp());
 
                       //Store result in history session
                       history.add(String.format("%.2f C = %.2f F",celsius,result));
@@ -85,6 +89,8 @@ public class Main {
 
                       double result = temperatureConverter(fahrenheit, subChoice);
                       IO.println("Result: " + fahrenheit + " C = " + String.format("%.2f", result) + " F");
+                      //To display time
+                      IO.println("Converted at: " +getTimeStamp());
 
                       //Store result in history session
                       history.add(String.format("%.2f C = %.2f F",fahrenheit,result));
@@ -124,13 +130,18 @@ public class Main {
 
                       double result2 = currencyConverter(amount, subChoice2);
                       IO.println("Result: " + amount + " SEK = " + String.format("%.2f", result2) + " USD");
+                      //To display time
+                      IO.println("Converted at: " +getTimeStamp());
 
                       //Store result in history session
                       history.add(String.format("%.2f SEK = %.2f USD",amount,result2));
-                  } else {
+                  }
+                  else {
 
                       double result2 = currencyConverter(amount, subChoice2);
                       IO.println("Result: " + amount + " SEK = " + String.format("%.2f", result2) + " EUR");
+                      //To display time
+                      IO.println("Converted at: " +getTimeStamp());
 
                       //Store result in history session
                       history.add(String.format("%.2f SEK = %.2f EUR",amount,result2));
@@ -178,6 +189,8 @@ public class Main {
                   }
 
                   IO.println("BMI: " + String.format("%.2f", bmi) + " ->   "  +bmiStatus);
+                  //To display time
+                  IO.println("Converted at: " +getTimeStamp());
 
                   //Store BMI and weight category in session history
                   history.add(String.format("BMI: %.2f -> %s"  , bmi, bmiStatus));
@@ -197,6 +210,7 @@ public class Main {
           if(choice == 4){
               break;
           }
+          IO.println();
           answer = IO.readln("Continue? (yes/no): ");
 
           //Ask the user again to enter if user enter other than yes or no
@@ -302,6 +316,11 @@ public class Main {
             }
 
         }
+    }
+    public static String getTimeStamp(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return now.format(formatter);
     }
 }
 
