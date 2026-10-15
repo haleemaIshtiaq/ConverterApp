@@ -186,16 +186,20 @@ public class Main {
 
               //EXIT
               case 4 -> {
-                  IO.println("Goodbye!");
-                  return;
+                  answer = "no";
               }
 
               //INVALID CHOICE
               default -> IO.println("Invalid choice!");
 
           }
-
+          //don't ask for continue if user wants to exit
+          if(choice == 4){
+              break;
+          }
           answer = IO.readln("Continue? (yes/no): ");
+
+          //Ask the user again to enter if user enter other than yes or no
           while(!answer.equalsIgnoreCase("yes")&& !answer.equalsIgnoreCase("no")){
               IO.println("Invalid input! please enter yes or no");
               answer = IO.readln("Continue? (yes/no): ");
@@ -203,6 +207,17 @@ public class Main {
           }
 
       }while(answer.equalsIgnoreCase("yes"));
+
+      IO.println();  //For one line gap
+      //Displaying whole history
+      IO.println("=== Conversion History ===");
+      int count = 1;
+      for(String record : history){
+          IO.println(count + ". " +record);
+          count++;
+      }
+      IO.println("==========================");
+      IO.println("Total conversions: " +history.size());
 
       IO.println("Goodbye!");
 
