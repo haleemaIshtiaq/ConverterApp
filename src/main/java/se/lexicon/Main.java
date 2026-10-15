@@ -11,11 +11,19 @@ public class Main {
     static final double USD_RATE = 10.87;
     static final double EUR_RATE = 11.32;
 
+    //BMI calculator
+    static final double UNDERWEIGHT_LIMIT= 18.5;
+    static final double NORMAL_LIMIT= 25.0;
+    static final double OVERWEIGHT_LIMIT= 30.0;
+
+
+
 
 
 
     static void main() {
       String answer;
+
       //do-while used for continue until user enter no
       do {
           int choice = menu();
@@ -67,13 +75,13 @@ public class Main {
                   double height = Double.parseDouble(IO.readln("Enter height in meters: "));
                   double bmi = BMICalculator(weight,height);
                   String bmiStatus;
-                  if(bmi < 18.5){
+                  if(bmi < UNDERWEIGHT_LIMIT){
                       bmiStatus = "Underweight";
                   }
-                  else if ( bmi< 25){
+                  else if ( bmi< NORMAL_LIMIT){
                       bmiStatus = "Normal weight";
                   }
-                  else if ( bmi< 30){
+                  else if ( bmi< OVERWEIGHT_LIMIT){
                       bmiStatus = "Overweight";
                   }
                   else{
