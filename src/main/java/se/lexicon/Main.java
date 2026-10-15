@@ -3,6 +3,11 @@ package se.lexicon;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    //Temperature  converter
+    static final double FAHRENHEIT_FACTOR = 9.0/5.0;
+    static final double FAHRENHEIT_OFFSET = 32.0;
+
+
 
     static void main() {
       String answer;
@@ -107,11 +112,12 @@ public class Main {
     //Method to convert temperatures
     public static double temperatureConverter(double value, int subChoice){
         if(subChoice==1) {
-            return (value * 9.0/5.0) +32;
+            return value * FAHRENHEIT_FACTOR + FAHRENHEIT_OFFSET;
+
 
         }
         else{
-            return  (value - 32) * 5.0 / 9.0;
+            return  (value - FAHRENHEIT_OFFSET) /FAHRENHEIT_FACTOR;
         }
     }
 //Method to convert currency
@@ -125,8 +131,6 @@ public class Main {
         }
 
     }
-
-
 
     //BMI calculator
     public static double BMICalculator(double weight, double height){
