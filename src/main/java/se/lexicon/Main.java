@@ -1,5 +1,7 @@
 package se.lexicon;
 
+import java.util.ArrayList;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -25,6 +27,8 @@ public class Main {
 
 
     static void main() {
+        //Create an empty list
+        ArrayList<String>  history = new ArrayList<>();
       String answer;
 
       //do-while used for continue until user enter no
@@ -63,7 +67,12 @@ public class Main {
 
                       double result = temperatureConverter(celsius, subChoice);
                       IO.println("Result: " + celsius + " C = " + String.format("%.2f", result) + " F");
-                  } else  {
+
+                      //Store result in history session
+                      history.add(String.format("%.2f C = %.2f F",celsius,result));
+
+                  }
+                  else  {
                       //Taking value and checking for number
                       double fahrenheit = readDouble("Enter temperature in Fahrenheit: ");
 
@@ -71,12 +80,14 @@ public class Main {
                       while(fahrenheit < MIN_FAHRENHEIT){
                           IO.println("Invalid value. Temperature cannot be below (-459.67 F).");
                           fahrenheit = readDouble("Enter temperature in Fahrenheit: ");
+
                       }
-
-
 
                       double result = temperatureConverter(fahrenheit, subChoice);
                       IO.println("Result: " + fahrenheit + " C = " + String.format("%.2f", result) + " F");
+
+                      //Store result in history session
+                      history.add(String.format("%.2f C = %.2f F",fahrenheit,result));
                   }
 
 
@@ -113,10 +124,16 @@ public class Main {
 
                       double result2 = currencyConverter(amount, subChoice2);
                       IO.println("Result: " + amount + " SEK = " + String.format("%.2f", result2) + " USD");
+
+                      //Store result in history session
+                      history.add(String.format("%.2f SEK = %.2f USD",amount,result2));
                   } else {
 
                       double result2 = currencyConverter(amount, subChoice2);
                       IO.println("Result: " + amount + " SEK = " + String.format("%.2f", result2) + " EUR");
+
+                      //Store result in history session
+                      history.add(String.format("%.2f SEK = %.2f EUR",amount,result2));
                   }
 
 
@@ -161,6 +178,9 @@ public class Main {
                   }
 
                   IO.println("BMI: " + String.format("%.2f", bmi) + " ->   "  +bmiStatus);
+
+                  //Store BMI and weight category in session history
+                  history.add(String.format("BMI: %.2f -> %s"  , bmi, bmiStatus));
               }
 
 
