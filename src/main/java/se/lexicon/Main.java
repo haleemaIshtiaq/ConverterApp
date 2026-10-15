@@ -17,6 +17,11 @@ public class Main {
     static final double NORMAL_LIMIT= 25.0;
     static final double OVERWEIGHT_LIMIT= 30.0;
 
+    //validation
+    static final double MIN_CELSIUS= -273.15;
+    static final double MIN_FAHRENHEIT= -459.67;
+
+
 
 
     static void main() {
@@ -34,16 +39,46 @@ public class Main {
                           Convert:
                             1. Celsius to Fahrenheit
                             2. Fahrenheit to Celsius""");
-                  int subChoice = Integer.parseInt(IO.readln("Your choice: "));
+                  //int subChoice = Integer.parseInt(IO.readln("Your choice: "));
+
+                  //Taking number from user and check also if it is not a number
+                  int subChoice = readInt("Your choice: ");
+
+                  //Checking if user enter other than 1 or 2
+                  while(subChoice != 1 && subChoice != 2){
+                      IO.println("Invalid input. please enter 1 or 2");
+                      subChoice = readInt("Your choice: ");
+                  }
+
+                  //Checking either it is 1 or 2
                   if (subChoice == 1) {
-                      double celsius = Double.parseDouble(IO.readln("Enter temperature in Celsius: "));
+                      //Taking value and checking for number
+                      double celsius = readDouble("Enter temperature in Celsius: ");
+
+                      //Checking temperature if it is below absolute zero
+                      while(celsius < MIN_CELSIUS){
+                          IO.println("Invalid value. Temperature cannot be below absolute zero (-273.15 C).");
+                          celsius = readDouble("Enter temperature in Celsius: ");
+                      }
+
                       double result = temperatureConverter(celsius, subChoice);
                       IO.println("Result: " + celsius + " C = " + String.format("%.2f", result) + " F");
-                  } else {
-                      double fahrenheit = Double.parseDouble(IO.readln("Enter temperature in Fahrenheit: "));
+                  } else  {
+                      //Taking value and checking for number
+                      double fahrenheit = readDouble("Enter temperature in Fahrenheit: ");
+
+                      //Checking temperature if it is below absolute zero
+                      while(fahrenheit < MIN_FAHRENHEIT){
+                          IO.println("Invalid value. Temperature cannot be below (-459.67 F).");
+                          fahrenheit = readDouble("Enter temperature in Fahrenheit: ");
+                      }
+
+
+
                       double result = temperatureConverter(fahrenheit, subChoice);
                       IO.println("Result: " + fahrenheit + " C = " + String.format("%.2f", result) + " F");
                   }
+
 
 
               }
@@ -55,8 +90,25 @@ public class Main {
                               Convert:
                                 1. SEK to USD
                                 2. SEK to EUR""");
-                  int subChoice2 = Integer.parseInt(IO.readln("Your choice: "));
-                  double amount = Double.parseDouble(IO.readln("Enter amount in SEK: "));
+
+                  //Taking number from user and check also if it is not a number
+                  int subChoice2 = readInt("Your choice: ");
+
+                  //Checking if user enter other than 1 or 2
+                  while(subChoice2 != 1 && subChoice2 != 2){
+                      IO.println("Invalid input. please enter 1 or 2");
+                      subChoice2 = readInt("Your choice: ");
+                  }
+
+                  //Taking value in SEK and checking if it is a number
+                  double amount = readDouble("Enter amount in SEK: ");
+
+                  //Amount should be positive or 0
+                  while(amount < 0){
+                      IO.println("Invalid amount. Please enter zero or a positive number.");
+                      amount = readDouble("Enter amount in SEK: ");
+                  }
+
                   if (subChoice2 == 1) {
 
                       double result2 = currencyConverter(amount, subChoice2);
@@ -74,8 +126,25 @@ public class Main {
               //BMI CALCULATOR
               case 3 -> {
                   IO.println("--- BMI Calculator ---");
-                  double weight =Double.parseDouble( IO.readln("Enter weight in kg: "));
-                  double height = Double.parseDouble(IO.readln("Enter height in meters: "));
+
+                  //Taking value and checking for number
+                  double weight = readDouble("Enter weight in kg: ");
+
+                  //Checking for invalid input eg 0 oe less than 0
+                  while(weight<=0){
+                      IO.println("Invalid weight! Please enter a value greater than zero");
+                      weight = readDouble("Enter weight in kg: ");
+                  }
+
+                  //Taking value and checking for number
+                  double height = readDouble("Enter height in meters: ");
+
+                  //Checking for invalid input eg 0 oe less than 0
+                  while(height<=0){
+                      IO.println("Invalid height! Please enter a value greater than zero");
+                      height = readDouble("Enter height in meters: ");
+                  }
+
                   double bmi = BMICalculator(weight,height);
                   String bmiStatus;
                   if(bmi < UNDERWEIGHT_LIMIT){
@@ -107,6 +176,12 @@ public class Main {
           }
 
           answer = IO.readln("Continue? (yes/no): ");
+          while(!answer.equalsIgnoreCase("yes")&& !answer.equalsIgnoreCase("no")){
+              IO.println("Invalid input! please enter yes or no");
+              answer = IO.readln("Continue? (yes/no): ");
+
+          }
+
       }while(answer.equalsIgnoreCase("yes"));
 
       IO.println("Goodbye!");
@@ -124,7 +199,9 @@ public class Main {
         IO.println("3. BMI Calculator");
         IO.println("4. Exit");
         IO.println("==============================");
-        return Integer.parseInt(IO.readln("Choose an option: "));
+
+            return readInt("Choose an option: ");
+
 
     }
 
@@ -154,4 +231,35 @@ public class Main {
     public static double BMICalculator(double weight, double height){
        return  weight / Math.pow(height, 2);
     }
+
+
+    //Validation for int
+    public static int readInt(String prompt){
+        while(true){
+            try{
+                int number = Integer.parseInt(IO.readln(prompt));
+                return number;
+            } catch (NumberFormatException e){
+
+                IO.println("Invalid input.Please enter a number.");
+            }
+
+        }
+    }
+
+    //Validation for double
+    public static double readDouble(String prompt){
+        while(true){
+            try{
+                double number = Double.parseDouble(IO.readln(prompt));
+                return number;
+            } catch (NumberFormatException e){
+
+                IO.println("Invalid input.Please enter a number.");
+            }
+
+        }
+    }
 }
+
+
