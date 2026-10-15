@@ -51,6 +51,31 @@ public class Main {
               }
 
 
+              case 3 -> {
+                  IO.println("--- BMI Calculator ---");
+                  double weight =Double.parseDouble( IO.readln("Enter weight in kg: "));
+                  double height = Double.parseDouble(IO.readln("Enter height in meters: "));
+                  double bmi = BMICalculator(weight,height);
+                  String bmiStatus;
+                  if(bmi < 18.5){
+                      bmiStatus = "Underweight";
+                  }
+                  else if ( bmi< 25){
+                      bmiStatus = "Normal weight";
+                  }
+                  else if ( bmi< 30){
+                      bmiStatus = "Overweight";
+                  }
+                  else{
+                      bmiStatus = "Obese";
+                  }
+
+                  IO.println("BMI: " + String.format("%.2f", bmi) + " ->   "  +bmiStatus);
+
+
+              }
+
+
 
               case 4 -> {
                   IO.println("Goodbye!");
@@ -99,5 +124,12 @@ public class Main {
             return  amount / 11.32;
         }
 
+    }
+
+
+
+    //BMI calculator
+    public static double BMICalculator(double weight, double height){
+       return  weight / Math.pow(height, 2);
     }
 }
