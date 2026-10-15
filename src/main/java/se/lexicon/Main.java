@@ -252,7 +252,15 @@ public class Main {
         while(true){
             try{
                 double number = Double.parseDouble(IO.readln(prompt));
-                return number;
+
+                //Checking for finite number(no Infinity and NaN accepted)
+                if (Double.isFinite(number)) {
+                    return number;
+                }
+                else{
+                    IO.println("Invalid input! Please enter a finite number");
+                }
+
             } catch (NumberFormatException e){
 
                 IO.println("Invalid input.Please enter a number.");
